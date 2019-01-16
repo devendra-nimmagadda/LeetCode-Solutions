@@ -1,0 +1,24 @@
+class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        String prefix = "";
+        
+        if(strs.length > 0)
+        {
+            String first = strs[0];
+            int pos = 0;
+            while(pos < first.length()) {
+                prefix += first.toCharArray()[pos];
+                for(int i=1; i<strs.length; i++) 
+                {
+                    if(!(pos < strs[i].length() && strs[i].startsWith(prefix))) {
+                        return prefix.substring(0, pos);
+                    }
+                        
+                }
+                pos ++;
+            }
+        }
+        
+        return prefix;
+    }
+}
