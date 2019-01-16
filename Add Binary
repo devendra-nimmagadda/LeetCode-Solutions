@@ -1,0 +1,52 @@
+class Solution {
+    public String addBinary(String a, String b) {
+        char[] x = a.toCharArray();
+		char[] y = b.toCharArray();
+		char[] z = new char[x.length>y.length ? x.length + 1:y.length + 1];
+		
+		int c = 0, p3= z.length - 1, p1 = x.length - 1, p2 = y.length - 1, s = 0;
+		while(p1 >= 0 && p2 >= 0) {
+			s = x[p1]-48 + y[p2]-48 + c;
+			if(s <= 1) {
+				c = 0;
+				z[p3] = (char)(s+48);
+			} else {
+				c = 1;
+				if(s == 2)
+					z[p3] = (char)48;
+				else
+					z[p3] = (char)49;
+			}
+			p1--;
+			p2--;
+			p3--;
+		}
+		
+		while(p1 >= 0) {
+			s = x[p1--] - 48+ c;
+			if(s > 1) {
+				c = 1;
+				z[p3--] = 48;
+			} else {
+				c = 0;
+				z[p3--] = (char)(s+48);
+			}
+		}
+		
+		while(p2 >= 0) {
+			s = y[p2--] -48 + c;
+			if(s > 1) {
+				c = 1;
+				z[p3--] = 48;
+			} else {
+				c = 0;
+				z[p3--] = (char)(s+48);
+			}
+		}
+		if(p3 == 0)
+			z[0] = (char)(c+48);
+		
+		String sum = String.valueOf(z);
+		return sum.toCharArray()[0] == 48?sum.substring(1, sum.length()):sum;
+    }
+}
