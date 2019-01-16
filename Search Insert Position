@@ -1,0 +1,8 @@
+class Solution {
+    public int searchInsert(int[] nums, int target) {
+        int pos = 0;
+        while(pos < nums.length && target > nums[pos])
+            pos++;
+        return pos;
+    }
+}
