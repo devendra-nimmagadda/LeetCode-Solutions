@@ -1,0 +1,8 @@
+class Solution {
+    public int mySqrt(int x) {
+        long result = 0;
+        while((result*result) <= x)
+            result++;
+        return (int)(result > 0?result - 1:result);
+    }
+}
