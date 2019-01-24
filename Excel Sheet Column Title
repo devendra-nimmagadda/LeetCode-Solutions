@@ -1,0 +1,24 @@
+class Solution {
+    public String convertToTitle(int n) {
+        StringBuilder builder = new StringBuilder();
+		if(n<=0)
+			return "";
+		
+		if(n >= 1 && n<=26) {
+			builder.append(String.valueOf((char)(n+64)));
+		} else {		
+			while(n > 0) {			
+				int r = n%26;
+				if(r == 0) {
+					r = 26;
+					n/= 26;
+					n--;
+				} else {
+					n /= 26;
+				}
+				builder.append((char)(r + 64));				
+			}			
+		}		
+		return builder.reverse().toString();   
+    }
+}
