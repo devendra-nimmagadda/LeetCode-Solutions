@@ -1,0 +1,21 @@
+class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+        if(nums1.length == 0 || nums2.length == 0)
+            return new int[]{};
+       Set<Integer> set = new HashSet<>(); 
+       Set<Integer> set1 = new HashSet<>(); 
+       for(int i: nums1) {
+    	   set.add(i);
+    	   set1.add(i);
+       }
+       
+       Set<Integer> set2 = new HashSet<>(); 
+       for(int i: nums2)
+    	   set2.add(i);
+       
+       set.removeAll(set2);
+       set1.removeAll(set);
+       
+       return set1.stream().mapToInt(x->x).toArray();
+    }
+}
