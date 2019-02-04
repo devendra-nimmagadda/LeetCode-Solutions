@@ -1,0 +1,51 @@
+class MyQueue {
+    List<Integer> list = null;
+    /** Initialize your data structure here. */
+    public MyQueue() {
+        list = new ArrayList<>();
+    }
+    
+    /** Push element x to the back of queue. */
+    public void push(int x) {
+        list.add(x);
+
+    }
+    
+    /** Removes the element from in front of queue and returns that element. */
+    public int pop() {
+        if(list == null || list.isEmpty())
+            return -1;
+        int result = -1;
+        if(!list.isEmpty())
+        {            
+            List<Integer> temp = new ArrayList<>();
+            for(int i=list.size()-1; i>0; i--)
+                temp.add(list.remove(i));      
+            result = list.get(0);
+            list.remove(0);
+            for(int i=temp.size()-1; i>=0; i--)
+                list.add(temp.remove(i));  
+
+        }        
+        return result;
+    }
+    
+    /** Get the front element. */
+    public int peek() {
+        return list.get(0);
+    }
+    
+    /** Returns whether the queue is empty. */
+    public boolean empty() {
+        return list.isEmpty();
+    }
+}
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue obj = new MyQueue();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.peek();
+ * boolean param_4 = obj.empty();
+ */
