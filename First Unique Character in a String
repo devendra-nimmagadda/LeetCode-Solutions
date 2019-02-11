@@ -1,0 +1,28 @@
+class Solution {
+    public int firstUniqChar(String s) {
+        Map<Character, List<Integer>> map = new LinkedHashMap<>();
+        int i=0;
+        List<Integer> count = null;
+        for(char c : s.toCharArray())
+        {            
+            if(map.get(c) == null)
+            {
+                count = new ArrayList<>();
+                count.add(i);
+                map.put(c, count); 
+            }
+            else
+            {
+                map.get(c).add(i);                
+            }
+           
+            i++;
+        }
+        for(char c:map.keySet())
+        {
+            if(map.get(c).size() == 1)
+                return map.get(c).get(0);
+        }
+        return -1;
+    }
+}
