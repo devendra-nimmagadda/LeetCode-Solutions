@@ -1,0 +1,31 @@
+class Solution {
+    public boolean canConstruct(String ransomNote, String magazine) {
+        char[] vals = ransomNote.toCharArray();
+        char[] vals2 = magazine.toCharArray();
+        List<Character> list = new ArrayList<>();
+        List<Character> list2 = new ArrayList<>();
+        for(char c:vals)
+        {
+            list.add(c);
+        }
+        for(char c:vals2)
+        {
+            list2.add(c);
+        }
+        
+        for(char c:list)
+        {
+            if(!list2.contains(c))
+                return false;
+            for(int i=0; i<list2.size(); i++)
+            {
+                if(list2.get(i) == c)
+                {
+                    list2.set(i, '\0');
+                    break;
+                }
+            }   
+        }
+        return true;
+    }
+}
