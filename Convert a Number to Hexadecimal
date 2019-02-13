@@ -1,0 +1,47 @@
+class Solution {
+    public String toHex(int num) {
+        if(num == 0)
+            return "0";
+        int sum = 0, count = 0, w = 1;
+        String result = "", part = "";
+        while(num != 0)
+        {
+            if((num&1) == 1)
+            {
+                sum += w;
+            }   
+            w *= 2;
+            count ++;
+            if(count == 4)
+            {
+                if(sum>9)
+                {
+                    part = String.valueOf((char)(sum + 87));
+                }
+                else
+                {
+                    part = String.valueOf(sum);
+                }  
+                count = 0;     
+                result = part + result;
+                part = "";
+                sum = 0;
+                w = 1;
+            }            
+            num >>>= 1;
+        }
+        if(sum > 0)
+        {
+            if(sum>9)
+            {
+                   part = String.valueOf((char)(sum + 87));
+            }
+            else
+            {
+                part = String.valueOf(sum);
+            }
+            result = part + result;
+        }
+        return result;
+    }
+}
