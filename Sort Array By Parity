@@ -1,0 +1,54 @@
+class Solution {
+    public int[] sortArrayByParity(int[] A) {
+        int[] result = new int[A.length];
+        int x=0, y=A.length-1;
+        
+        for(int i:A)
+        {
+            if(i%2 == 0)
+            {
+                int k=0;
+                boolean flag = false;
+                while(k<x)
+                {                    
+                    if(i < result[k])
+                    {
+                    	int l=x; 
+                        for(;l>k; l--)
+                            result[l] = result[l-1];
+                        result[l] = i;
+                        flag = true;
+                        break;
+                    }   
+                    k++;
+                }
+                if(!flag)
+                	result[k] = i;
+                x++;
+            }
+            else
+            {
+            	int k=A.length - 1;
+                boolean flag = false;
+                while(k > y)
+                {                    
+                    if(i > result[k])
+                    {
+                    	int l=y; 
+                        for(;l<k; l++)
+                            result[l] = result[l+1];
+                        result[l] = i;
+                        flag = true;
+                        break;
+                    }   
+                    k--;
+                }
+                if(!flag)
+                	result[k] = i;
+                y--; 
+            }
+        }   
+        
+        return result;
+    }
+}
