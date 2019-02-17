@@ -1,0 +1,42 @@
+class Solution {
+    public int[] diStringMatch(String S) {
+        int x=0, y=S.length();
+        int[] result = new int[y+1];
+        if(S.length() == 0)
+            return result;
+        int pos = 0;
+        char[] vals = S.toCharArray();
+        if(vals[0] == 'I')
+        {
+            result[pos] = x++;
+        }
+        else if(vals[0] == 'D')
+        {
+            result[pos] = y--;
+        }
+        pos = 1;
+        for(int i=1; i<S.length(); i++)
+        {
+            char c = vals[i];
+            if(c=='I')
+            {
+                result[pos] = x++;                
+            }
+            else if(c=='D')
+            {
+                result[pos] = y--;
+            }
+            pos++;
+        }
+        
+        if(vals[S.length()-1] == 'I')
+        {
+            result[pos] = x;
+        }
+        else if(vals[S.length()-1] == 'D')
+        {
+            result[pos] = y;
+        }
+        return result;
+    }
+}
