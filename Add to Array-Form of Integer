@@ -1,0 +1,74 @@
+class Solution {
+    public List<Integer> addToArrayForm(int[] A, int k) {
+        int c = 0;
+        List<Integer> list = new ArrayList<>();
+        int count=0,t=k;
+        if(k==0)
+            count=1;
+        else
+        {
+            while(t>0)
+            {
+                count++;
+                t/=10;
+            }
+        }        
+        int[] result = new int[A.length>count?A.length+1:count+1];
+        int i=A.length-1,pos = result.length-1;
+        while(i>=0 && k>0)
+        {
+            t = k%10;
+            int sum = c+A[i]+t;
+            if(sum>9)
+            {
+                c = sum/10;
+                result[pos--] = sum-10;
+            }
+            else
+            {
+                c=0;
+                result[pos--] = sum;
+            }
+            k/=10;
+            i--;
+        }
+        while(k>0)
+        {
+            t = k%10;
+            int sum = c+t;
+            if(sum>9)
+            {
+                c = sum/10;
+                result[pos--] = sum-10;
+            }
+            else
+            {
+                c=0;
+                result[pos--] = sum;
+            }
+            k/=10;
+        }
+        while(i>=0)
+        {
+            int sum = c+A[i];
+            if(sum>9)
+            {
+                c = sum/10;
+                result[pos--] = sum-10;
+            }
+            else
+            {
+                c=0;
+                result[pos--] = sum;
+            }
+            i--;
+        }
+        if(c>0)
+            result[0] = c;
+        if(result[0] !=0)
+            list.add(result[0]);
+        for(int x=1;x<result.length;x++)
+            list.add(result[x]);
+        return list;
+    }
+}
