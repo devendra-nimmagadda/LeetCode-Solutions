@@ -1,0 +1,67 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public boolean isCousins(TreeNode root, int x, int y) {
+        List<List<Object>> list = new ArrayList<>();
+        findNodes(null, root, list, 0);
+        for(List<Object> t:list)
+        {
+            TreeNode parent = (TreeNode)t.get(0);
+            int val = (Integer)t.get(1);
+            int depth = ((Integer)t.get(2));
+            if(val == x)
+            {
+               for(List<Object> t2:list)
+               {
+                   TreeNode parent2 = (TreeNode)t2.get(0);
+                   int val2 = ((Integer)t2.get(1));
+                   int depth2 = ((Integer)t2.get(2));
+                   
+                   if(val2 == y)
+                   {
+                        if(depth == depth2 && parent.val != parent2.val)
+                            return true;
+                   }
+               }
+            } 
+            else if(val == y)
+            {
+               for(List<Object> t2:list)
+               {
+                   TreeNode parent2 = (TreeNode)t2.get(0);
+                   int val2 = ((Integer)t2.get(1));
+                   int depth2 = ((Integer)t2.get(2));
+                   
+                   if(val2 == x)
+                   {
+                        if(depth == depth2 && parent.val != parent2.val)
+                            return true;
+                   }
+               }
+            }
+        }
+        return false;
+    }
+    
+    void findNodes(TreeNode parent, TreeNode root, List<List<Object>> list, int depth)
+    {
+        if(root == null)
+            return;
+        
+        List<Object> t = new ArrayList<>();
+        t.add(parent);
+        t.add(root.val);
+        t.add(depth);
+        list.add(t);
+        
+        findNodes(root, root.left, list, depth+1);
+        findNodes(root, root.right, list, depth+1);
+    }
+}
