@@ -1,0 +1,42 @@
+class Solution {
+    public List<Integer> powerfulIntegers(int x, int y, int bound) {
+        int a=0, b=0;
+        List<Integer> list = new ArrayList<>();
+        boolean flag = false;
+        do
+        {
+            flag = false;
+             for(int i=0;i<=a;i++)
+             {
+                 for(int j=0; j<=b; j++)
+                 {
+                     int k=0;
+                    int val = 1;
+                     while(k<i)
+                     {
+                         val *= x;
+                         k++;
+                     }
+                     
+                     int val2 = 1;
+                     k=0;
+                     while(k<j)
+                     {
+                         val2 *= y;
+                         k++;
+                     }
+                     int sum = val+val2;
+                     if(sum <= bound && !list.contains(sum))
+                     {
+                         list.add(sum);
+                         flag = true;
+                     }
+                 }
+             }
+            a++;
+            b++;
+        } while(flag);
+        
+        return list;
+    }
+}
