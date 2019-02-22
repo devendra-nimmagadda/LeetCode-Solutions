@@ -1,0 +1,20 @@
+class Solution {
+    public String reverseOnlyLetters(String S) {
+        List<Character> list = new ArrayList<>();
+        for(char c:S.toCharArray())
+        {
+            if((c>='A' && c<='Z') || (c>='a' && c<='z'))
+                list.add(c);
+        }
+        char[] result = new char[S.length()];
+        int i=0, len = list.size()-1;
+        for(char c:S.toCharArray())
+        {
+            if((c>='A' && c<='Z') || (c>='a' && c<='z'))
+                result[i++] = list.get(len--);
+            else
+                result[i++] = c;
+        }
+        return String.valueOf(result);
+    }
+}
