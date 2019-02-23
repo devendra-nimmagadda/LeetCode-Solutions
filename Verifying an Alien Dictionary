@@ -1,0 +1,49 @@
+class Solution {
+    	public boolean isAlienSorted(String[] words, String order) {
+
+		Map<Character,  Integer> map = new HashMap<>();
+        char[] vals = order.toCharArray();
+        for(int i=1; i<=vals.length; i++)
+            map.put(vals[i-1], i);
+        List<String> list = new ArrayList<>();
+        int pos = 0;
+        for(int i=0; i<words.length-1; i++)
+        {
+        	if(words[i].length() <= pos || words[i+1].length() <= pos)
+                continue;
+            int x = map.get(words[i].toCharArray()[pos]);
+            int y = map.get(words[i+1].toCharArray()[pos]);
+            if(x > y)
+                return false;
+            if(x == y) 
+            {
+                list.add(words[i]);    
+                list.add(words[i+1]); 
+            }
+        }
+        pos = 1;
+        while(!list.isEmpty())
+        {
+            List<String> list2 = new ArrayList<>();
+            for(int i=0; i<list.size()-1; i++)
+            {
+                if(list.get(i).length() <= pos)
+                    continue;             
+                if(list.get(i+1).length() <= pos)
+                    return false;
+                int x = map.get(list.get(i).toCharArray()[pos]);
+                int y = map.get(list.get(i+1).toCharArray()[pos]);
+                if(x > y)
+                    return false;
+                if(x == y)
+                {
+                    list2.add(list.get(i));    
+                    list2.add(list.get(i+1)); 
+                }
+            }
+            list = list2;
+            pos++;
+        }
+        return true;        
+    }
+}
