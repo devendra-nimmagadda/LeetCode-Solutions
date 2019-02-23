@@ -1,0 +1,19 @@
+class Solution {
+    public int[][] kClosest(int[][] points, int K) {
+        Map<Double, Integer> map = new TreeMap<Double, Integer>();
+        for(int i=0; i<points.length; i++)
+        {
+            double st = Math.sqrt(points[i][0] * points[i][0] + points[i][1] * points[i][1] );
+            map.put(st, i);
+        }
+        int[][] result = new int[K][2];
+        Iterator<Double> it= map.keySet().iterator();
+        for(int i=0; i<K && it.hasNext(); i++)
+        {
+        	Double s = it.next();
+            result[i][0] = points[map.get(s)][0];
+            result[i][1] = points[map.get(s)][1];
+        }
+        return result;
+    }
+}
