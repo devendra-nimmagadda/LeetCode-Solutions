@@ -1,0 +1,27 @@
+class Solution {
+    public String[] reorderLogFiles(String[] logs) {
+        Map<String, Integer> map = new TreeMap<>();
+        List<String> list = new ArrayList<>();
+        for(int i=0; i<logs.length; i++)
+        {
+            String str = logs[i];
+            String[] vals = str.split(" ");
+            if(vals[1].toCharArray()[0] >= '0' && vals[1].toCharArray()[0] <='9')
+                list.add(str);
+            else
+            {
+                String s = "";
+                for(int j=1; j<vals.length; j++)
+                    s+=vals[j]+" ";
+                map.put(s, i);
+            }
+        }
+        String[] result = new String[logs.length];
+        int count = 0;
+        for(String s:map.keySet())
+            result[count++] = logs[map.get(s)];
+        for(String s:list)
+            result[count++] = s;
+        return result;
+    }
+}
