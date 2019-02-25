@@ -1,0 +1,41 @@
+class Solution {
+    public int findJudge(int N, int[][] trust) {
+        Map<Integer, Set<Integer>> map = new HashMap<>();
+        for(int i=0; i<trust.length; i++)
+        {
+            if(map.get(trust[i][0]) == null)
+            {
+                Set<Integer> set = new HashSet<>();
+                set.add(trust[i][1]);
+                map.put(trust[i][0], set);
+            }
+            else
+            {
+                map.get(trust[i][0]).add(trust[i][1]);
+            }
+        }
+        int count = 0;
+        Set<Integer> set2 = new HashSet<>();
+        for(int i=1; i<=N; i++)
+        {
+            set2.add(i);
+        }
+        for(int i=1; i<=N; i++)
+        {
+            if(map.get(i) == null)
+            {
+                count++;   
+                if(count > 1)
+                    return -1;                
+            }
+            else
+            {
+                set2.retainAll(map.get(i));
+            }
+        }
+        if(set2.size() > 0)
+            return set2.iterator().next();
+        else
+            return -1;
+    }
+}
