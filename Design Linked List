@@ -1,0 +1,71 @@
+class MyLinkedList {
+
+    List<Integer> list = null;
+    
+    /** Initialize your data structure here. */
+    public MyLinkedList() {
+        list = new ArrayList<>();
+    }
+    
+    /** Get the value of the index-th node in the linked list. If the index is invalid, return -1. */
+    public int get(int index) {
+        if(list == null || list.isEmpty() || index >= list.size())
+            return -1;
+        else
+            return list.get(index);
+    }
+    
+    /** Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list. */
+    public void addAtHead(int val) {
+        if(list.isEmpty())
+            list.add(val);
+        else
+        {
+            List<Integer> list2 = new ArrayList<>();
+            list2.add(val);
+            for(int i:list)
+                list2.add(i);
+            list = list2;
+        }
+        //System.out.println(list);
+    }
+    
+    /** Append a node of value val to the last element of the linked list. */
+    public void addAtTail(int val) {
+        list.add(val);
+        //System.out.println(list);
+    }
+    
+    /** Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted. */
+    public void addAtIndex(int index, int val) {
+        if(index > list.size())
+            return;
+        //System.out.println("addAtIndex-before "+list);
+        List<Integer> list2 = new ArrayList<>();
+        for(int i=0; i<index; i++)
+            list2.add(list.get(i));
+        list2.add(val);
+        for(int i=index; i<list.size(); i++)
+            list2.add(list.get(i));
+        list = list2;
+        //System.out.println("addAtIndex-after "+list);
+    }
+    
+    /** Delete the index-th node in the linked list, if the index is valid. */
+    public void deleteAtIndex(int index) {
+        if(list.isEmpty() || index >= list.size())
+            return;
+        list.remove(index);
+        //System.out.println(list);
+    }
+}
+
+/**
+ * Your MyLinkedList object will be instantiated and called as such:
+ * MyLinkedList obj = new MyLinkedList();
+ * int param_1 = obj.get(index);
+ * obj.addAtHead(val);
+ * obj.addAtTail(val);
+ * obj.addAtIndex(index,val);
+ * obj.deleteAtIndex(index);
+ */
