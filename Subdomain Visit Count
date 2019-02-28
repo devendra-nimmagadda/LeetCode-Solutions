@@ -1,0 +1,28 @@
+class Solution {
+    public List<String> subdomainVisits(String[] cpdomains) {
+        Map<String, Integer> map = new HashMap<>();
+        for(String str:cpdomains)
+        {
+            String[] vals = str.split(" ");
+            String[] domains = vals[1].split("\\.");
+            String domain = "";
+            for(int i=domains.length-1; i>=0; i--)
+            {
+                if(domain.length() > 0)
+                    domain = domains[i]+"."+domain;
+                else
+                    domain = domains[i];
+                if(map.get(domain) == null)
+                    map.put(domain, Integer.valueOf(vals[0]));
+                else
+                    map.put(domain, Integer.valueOf(vals[0]) + map.get(domain));
+            }
+        }
+        List<String> list = new ArrayList<>();
+        for(String s:map.keySet())
+        {
+            list.add(map.get(s)+" "+s);
+        }
+        return list;
+    }
+}
