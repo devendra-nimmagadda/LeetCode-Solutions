@@ -1,0 +1,17 @@
+class Solution {
+    public String convertToBase7(int num) {
+        String result = "";
+        if(num<0) {
+            result = "-";
+            num=-num;
+        }
+        String result2 = "";
+        while(num > 6)
+        {
+            result2=(num%7)+result2;
+            num/=7;
+        }
+        result+=num+result2;
+        return result;
+    }
+}
