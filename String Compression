@@ -1,0 +1,36 @@
+class Solution {
+    public int compress(char[] chars) {
+        int count=0;
+        char[] vals = new char[chars.length];
+        for(int i=0; i<chars.length; i++)
+        {
+            char c=chars[i];
+            int times=1;
+            for(int j=i+1;j<chars.length;j++)
+            {
+                if(c!=chars[j])
+                    break;
+                times++;
+            }
+            vals[count]=c;
+            count++;
+            if(times > 1)
+            {    
+                String str = getString(times);
+                for(int ii=0;ii<str.length();ii++)
+                    vals[count+ii]=str.toCharArray()[ii];                
+                i+=times-1;
+                count+=str.length();
+            }                        
+        }
+        for(int i=0;i<count;i++)
+            chars[i]=vals[i];
+        return count;
+    }
+    private String getString(int times)
+    {
+        if(times<=9)
+            return times+"";
+        return getString(times/10)+(times%10);
+    }
+}
