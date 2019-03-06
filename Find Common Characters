@@ -1,0 +1,38 @@
+class Solution {
+    public List<String> commonChars(String[] A) {
+        List<Character> result = new ArrayList<>();        
+        List<String> finalResult = new ArrayList<>();
+        if(A.length < 1)
+        	return finalResult;
+        List<Character> s = getChars(A[0]);
+        for(char c:s)
+        {
+        	result.add(c);
+        }
+        for(int i=1;i<A.length; i++)
+        {
+        	List<Character> list = getChars(A[i]);
+        	List<Character> result2 = new ArrayList<>();
+        	for(char c:result)
+        	{        		
+        		if(list.contains(c))
+        		{
+        			result2.add(c);
+        			list.remove(list.indexOf(c));
+        		}        			
+        	}
+        	result = result2;
+        }
+        
+        for(char c:result)
+        	finalResult.add(String.valueOf(c));
+        return finalResult;
+    }
+    private List<Character> getChars(String str)
+    {
+    	List<Character> chars = new ArrayList<>();
+    	for(char c:str.toCharArray())
+    		chars.add(c);
+    	return chars;
+    }
+}
