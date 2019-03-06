@@ -1,0 +1,23 @@
+class Solution {
+    public int[] constructRectangle(int area) {
+        List<Integer> factors = new ArrayList<>();
+        for(int i=1;i<=area;i++)
+        {
+            if(area%i == 0)
+                factors.add(i);
+        }
+        int diff=Integer.MAX_VALUE, l=0, w=0, fl=0, fw=0;
+        for(int i:factors)
+        {
+            l=i;
+            w=area/i;
+            if(l>=w && l-w < diff)
+            {
+                fl=l;
+                fw=w;
+                diff=l-w;
+            }                
+        }
+        return new int[]{fl, fw};
+    }
+}
