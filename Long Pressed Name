@@ -1,0 +1,45 @@
+class Solution {
+    public boolean isLongPressedName(String name, String typed) {
+        ArrayList<String> list = new ArrayList<>(); 
+        char[] vals = name.toCharArray();
+        for(int i=0; i<vals.length;)
+        {
+            char c=vals[i];
+            String str = ""+String.valueOf(c);
+            int j=i+1;
+            for(;j<vals.length;j++)
+            {
+                if(c != vals[j])
+                    break;
+                str+=String.valueOf(c);
+            }
+            list.add(str);
+            i=j;
+        }
+        ArrayList<String> list2 = new ArrayList<>();
+        char[] vals2 = typed.toCharArray();
+        for(int i=0; i<vals2.length;)
+        {
+            char c=vals2[i];
+            String str = ""+String.valueOf(c);
+            int j=i+1;
+            for(;j<vals2.length;j++)
+            {
+                if(c != vals2[j])
+                    break;
+                str+=String.valueOf(c);
+            }
+            list2.add(str);
+            i=j;
+        }
+        if(list.size() != list2.size())
+            return false;
+        for(int i=0; i<list.size(); i++)
+        {
+            if(!(list2.get(i).startsWith(list.get(i)) || list.get(i).equals(list2.get(i))))
+                return false;
+        }
+        
+        return true;
+    }
+}
