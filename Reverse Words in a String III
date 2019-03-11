@@ -1,0 +1,28 @@
+class Solution {
+    public String reverseWords(String s) {
+        s = s.trim();
+		if(s.length() <=1)
+			return s;
+        int spos = 0;
+        int space = s.indexOf(" ");
+        char[] vals = s.toCharArray();
+        while(space != -1)
+        {
+            reverse(spos, space, vals);
+            spos = space+1;
+            space = s.indexOf(" ", spos);
+        }
+        reverse(spos, s.length(), vals);
+        return String.valueOf(vals);
+    }
+    private void reverse(int spos, int end, char[] vals)
+    {
+    	int b=0, e=end-spos;
+        for(int i=b; i<e/2; i++)
+        {
+            char c=vals[end-i-1];
+            vals[end-i-1] = vals[spos+i];
+            vals[spos+i] = c;
+        }
+    }
+}
