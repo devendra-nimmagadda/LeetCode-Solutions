@@ -1,0 +1,26 @@
+class Solution {
+    public int[] shortestToChar(String S, char C) {
+        int prev=-1, next=-1;
+        prev=next=S.indexOf(C);
+        char[] vals = S.toCharArray();
+        int[] result = new int[vals.length];
+    
+        for(int i=0; i<vals.length; i++)
+        {
+            int d = 0;
+            if(prev == next)
+                d = (prev-i) < (next-i)?prev-i:next-i;
+            else if(prev < next)
+                d = (i-prev) < (next-i)?i-prev:next-i;
+            result[i] = d>0?d:-d;
+            if(d == 0)
+            {
+                prev = next;
+                next = S.indexOf(C, prev+1);
+                if(next == -1)
+                    next = prev;
+            }            
+        }
+        return result;
+    }
+}
