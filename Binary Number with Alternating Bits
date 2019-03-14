@@ -1,0 +1,30 @@
+class Solution {
+    public boolean hasAlternatingBits(int n) {
+        int next = -1;
+        if((n&1) == 1)
+        {
+            next = 0;
+            n >>= 1;
+            while(n>0)
+            {
+                if((n&1) != next)
+                    return false;
+                next = (next == 1)?0:1;
+                n >>= 1;
+            }
+        }
+        else
+        {
+            next = 1;
+            n >>= 1;
+            while(n>0)
+            {
+                if((n&1) != next)
+                    return false;
+                next = (next == 1)?0:1;
+                n >>= 1;
+            }
+        }
+        return true;
+    }
+}
