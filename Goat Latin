@@ -1,0 +1,28 @@
+class Solution {
+    public String toGoatLatin(String S) {
+        if(S.trim().length() == 0)
+            return S;
+        S = S.trim();
+        String[] vals = S.split(" ");
+        StringBuilder str = new StringBuilder();
+        String suffix = "";
+        for(String s:vals)
+        {
+            if(str.length() > 0)
+                str.append(" ");
+            char c = s.toCharArray()[0];
+            if(c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' || c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U')
+            {
+                str.append(s);
+            } 
+            else
+            {
+                str.append(s.length()>1?s.substring(1)+c:s);
+            }
+            str.append("ma");
+            suffix += "a";
+            str.append(suffix);
+        }
+        return str.toString();
+    }
+}
