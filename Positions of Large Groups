@@ -1,0 +1,29 @@
+class Solution {
+    public List<List<Integer>> largeGroupPositions(String S) {
+        List<List<Integer>> list = new ArrayList<>();
+        if(S.length() < 3)
+            return list;
+        char[] vals = S.toCharArray();
+        for(int i=0; i<vals.length;)
+        {
+            int min = i, max = i;
+            int j=i; 
+            for(;j<vals.length-1; j++)
+            {
+                if(vals[j] != vals[j+1])
+                    break;
+                
+                max = j+1;
+            }
+            if(max - min + 1 >= 3)
+            {
+                List<Integer> sublist2 = new ArrayList<>();
+                sublist2.add(min);
+                sublist2.add(max);
+                list.add(sublist2);
+            }
+            i = j+1;
+        }
+        return list;
+    }
+}
