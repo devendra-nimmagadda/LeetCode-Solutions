@@ -1,0 +1,31 @@
+class Solution {
+    public int countPrimeSetBits(int L, int R) {
+        int result = 0;
+        List<Integer> primes = new ArrayList<>();
+        primes.add(2);
+        primes.add(3);
+        primes.add(5);
+        primes.add(7);
+        primes.add(11);
+        primes.add(13);
+        primes.add(17);
+        primes.add(19);
+        primes.add(23);
+        primes.add(29);
+        primes.add(31);
+        
+        for(int i=L; i<=R; i++)
+        {
+            int count = 0, val=i;
+            while(val != 0)
+            {
+                if((val & 1) == 1)
+                    count++;
+                val>>>=1;
+            }
+            if(count > 1 && primes.contains(count))
+                result++;
+        }
+        return result;
+    }
+}
