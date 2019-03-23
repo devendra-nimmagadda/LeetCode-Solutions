@@ -1,0 +1,24 @@
+class Solution {
+    public int[] findErrorNums(int[] nums) {
+        int len = nums.length;        
+        long sum = (len *(len+1))/2;
+        List<Integer> list = new ArrayList<>();
+        int dup = 0;
+        for(int i:nums)
+        {
+            if(list.contains(i))
+            {
+                dup = i;
+                break;
+            }
+            else
+                list.add(i);
+        }
+        long sum2 = 0;
+        for(int i:nums)
+        {
+            sum2+=i;
+        }
+        return  new int[]{dup, ((int)(sum-sum2))+dup};
+    }
+}
