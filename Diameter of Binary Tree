@@ -1,0 +1,41 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public int diameterOfBinaryTree(TreeNode root) {
+        if(root == null)            
+            return 0;
+        List<String> list = new ArrayList<>();
+        maxHeight(root, list);
+        //System.out.println(list);
+        int max = 0;
+        for(String s:list)
+        {
+            String[] vals = s.split("\\s+");
+            int sum = Integer.valueOf(vals[1])+ Integer.valueOf(vals[2]);
+            if(max < sum)
+                max = sum;
+        }
+        return max;
+    }
+    private int maxHeight(TreeNode node, List<String> list)
+    {
+        if(node == null)
+            return 0;
+        else if (node.left == null && node.right == null)
+            return 1;
+        else
+        {
+            int x = maxHeight(node.left, list);
+            int y = maxHeight(node.right, list);
+            list.add(String.valueOf(node.val)+" "+String.valueOf(x)+" "+String.valueOf(y));
+            return x>y? x+1 : y+1;
+        }
+    }
+}
