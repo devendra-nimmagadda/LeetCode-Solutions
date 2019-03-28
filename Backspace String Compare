@@ -1,0 +1,39 @@
+class Solution {
+    public boolean backspaceCompare(String S, String T) {
+		
+		S = change(S.trim());
+		T = change(T.trim());
+		//System.out.println(S +" - "+T);
+		if(S.equals(T))
+			return true;
+		else
+			return false;
+    }
+	
+	
+	private String change(String s) {
+        StringBuilder str = new StringBuilder(s);
+        boolean flag = true;
+        do
+        {            
+            flag = true;
+            for(int i=1; i>0 && i<str.length();)
+            {
+            	if(str.charAt(i) == '#')
+                {
+                    str.deleteCharAt(i);
+                    str.deleteCharAt(i-1);
+                    i-=2;
+                    flag = false;
+                }
+            	else
+            		i++;
+            }
+        }while(!flag);		
+        if(str.length() > 0 && str.charAt(0) == '#')
+        {
+            str.deleteCharAt(0);
+        }
+		return str.toString();
+	}
+}
