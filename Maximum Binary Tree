@@ -1,0 +1,63 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public TreeNode constructMaximumBinaryTree(int[] nums) {
+        TreeNode root = null;
+        if(nums.length == 0)
+            return root;
+        int[] max = findMax(nums, 0, nums.length-1);
+        root = new TreeNode(max[0]);
+        constructMaxTree(nums, 0, max[1]-1, root, 1);
+        constructMaxTree(nums, max[1]+1, nums.length-1, root,2);
+        //preorder(root);
+        return root;
+    }
+    
+    private void preorder(TreeNode root) {
+		if(root != null)
+		{
+			System.out.print(root.val+" ");
+			preorder(root.left);
+			preorder(root.right);
+		}		
+	}
+
+	private void constructMaxTree(int[] nums, int begin, int end, TreeNode parent, int pos)
+    {
+        if(begin <= end)
+        {
+            int[] max = findMax(nums, begin, end);
+            TreeNode node = new TreeNode(max[0]);
+            if(pos == 1)
+                parent.left = node;
+            else
+                parent.right = node;
+            parent = node;
+            if(begin <= max[1]-1)
+            	constructMaxTree(nums, begin, max[1]-1, parent, 1);
+            if(max[1]+1 <= end)
+            	constructMaxTree(nums, max[1]+1, end, parent, 2);
+        }
+    }
+    
+    private int[] findMax(int[] nums, int begin, int end)
+    {
+        int[] result = new int[] {nums[begin], begin};
+        for(int i=begin; i<=end; i++)
+        {
+            if(result[0] < nums[i])
+            {
+                result[0] = nums[i];
+                result[1] = i;
+            }
+        }
+        return result;
+    }
+}
