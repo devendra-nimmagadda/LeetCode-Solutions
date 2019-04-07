@@ -1,0 +1,37 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public int sumRootToLeaf(TreeNode root) {
+        List<String> paths = new ArrayList<>();
+        findPaths(root, paths, "");
+        //System.out.println(paths);
+        int sum = 0;
+        for(String str:paths)
+            sum+= Integer.valueOf(str, 2);
+        return sum;
+    }
+    
+    private void findPaths(TreeNode node, List<String> paths, String path)
+    {
+        if(node != null)
+        {
+            if(node.left == null && node.right == null)
+            {
+                path+= node.val;
+                paths.add(path);
+            }
+            else
+            {
+                findPaths(node.left, paths, path+node.val);  
+                findPaths(node.right, paths, path+node.val); 
+            }
+        }
+    }
+}
