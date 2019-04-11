@@ -1,0 +1,18 @@
+class Solution {
+    public String complexNumberMultiply(String a, String b) {
+        int[] x = getVals(a);
+        int[] y = getVals(b);
+        int xx = x[0]*y[0] - x[1]*y[1];
+        int yy = x[0]*y[1] + x[1]*y[0];
+        return (""+xx)+"+"+(yy+"i");
+    }
+    private int[] getVals(String a)
+    {
+        int[] result = new int[2];
+        String[] s = a.split("\\+");
+        String[] s2 = s[1].split("i");
+        result[0] = Integer.valueOf(s[0]);
+        result[1] = Integer.valueOf(s2[0]);        
+        return result;
+    }
+}
