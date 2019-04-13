@@ -1,0 +1,42 @@
+class Solution {
+    public List<Integer> partitionLabels(String S) {
+        List<Integer> list = new ArrayList<>();
+        S = S.trim();
+        if(S.length() == 1)
+        {
+            list.add(1);
+            return list; 
+        }
+        String s = S.substring(0,1);
+        String s2 = S.substring(1, S.length());
+        //System.out.println(s+" "+s2+" "+list);
+        while(s.length() > 0)
+        {         
+            for(int i=0; i<s.length(); i++)
+            {
+                int pos = s2.lastIndexOf(s.charAt(i));
+                if(pos > -1)
+                {
+                    s+= s2.substring(0, pos+1);
+                    s2 = pos+1 < s2.length() ? s2.substring(pos+1, s2.length()):"";
+                }
+                //System.out.println(s+" "+s2);
+            }
+            list.add(s.length());
+            if(s2.length() == 0)
+            	s = "";
+            else if(s2.length() == 1)
+            {
+                list.add(1);
+                s = "";
+            }
+            else
+            {
+                s = s2.substring(0,1);
+                s2 = s2.substring(1, s2.length());
+            }
+            //System.out.println(s+" "+s2+" "+list);
+        }        
+        return list;
+    }
+}
