@@ -1,0 +1,59 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public TreeNode pruneTree(TreeNode root) {
+        if(root == null)
+            return null;
+        if(isContain1(root))
+        {
+            if(!isContain1(root.left))
+                root.left = null;
+            else
+                pruneBinaryTree(root.left);
+            
+            if(!isContain1(root.right))
+                root.right = null;
+            else
+                pruneBinaryTree(root.right);
+        }
+        else
+            return null;
+                
+        return root;
+    }
+    
+    private boolean isContain1(TreeNode node)
+    {
+        if(node != null)
+        {
+            if(node.left == null && node.right == null)
+                return node.val == 1?true:false;
+            else if(node.left != null && node.right == null)
+                return node.val == 1?true:false || isContain1(node.left);
+            else if(node.left == null && node.right != null)
+                return node.val == 1?true:false || isContain1(node.right);
+            else 
+                return node.val == 1?true:false || isContain1(node.left) || isContain1(node.right);
+        }
+        return false;            
+    }
+    
+    private void pruneBinaryTree(TreeNode node)
+    {
+        if(node.left != null && isContain1(node.left))
+            pruneBinaryTree(node.left);
+        else
+            node.left = null;
+        if(node.right != null && isContain1(node.right))
+            pruneBinaryTree(node.right);
+        else
+            node.right = null;
+    }
+}
