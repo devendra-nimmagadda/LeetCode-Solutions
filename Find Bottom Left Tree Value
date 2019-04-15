@@ -1,0 +1,36 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public int findBottomLeftValue(TreeNode root) {
+        int val = -1;
+        List<TreeNode> list = new ArrayList<>();
+        list.add(root);
+        val = root.val;
+        while(list.size() > 0)
+        {
+            boolean flag = false;
+            List<TreeNode> list2 = new ArrayList<>();
+            for(int i=0; i<list.size(); i++)
+            {
+                if(list.get(i).left != null)
+                    list2.add(list.get(i).left);
+                if(list.get(i).right != null)
+                    list2.add(list.get(i).right);
+                if(!flag && list.get(i) != null)
+                {
+                    val = list.get(i).val;
+                    flag = true;
+                }
+            }
+            list = list2;
+        }
+        return val;
+    }
+}
