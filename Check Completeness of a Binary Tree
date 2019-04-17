@@ -1,0 +1,64 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public boolean isCompleteTree(TreeNode root) {
+        List<TreeNode> nodes = new ArrayList<>();
+        
+        if(root != null)
+        {
+            nodes.add(root);
+            int count = 1;
+            int levelCount = 1;
+            while(count == levelCount)
+            {   
+                List<TreeNode> nodes2 = new ArrayList<>();
+                for(int i=0; i<nodes.size(); i++)
+                {                   
+                    if(nodes.get(i) != null && nodes.get(i).left == null && nodes.get(i).right != null)
+                        return false;
+                    if(nodes.get(i) != null)
+                    {
+                        nodes2.add(nodes.get(i).left);
+                        nodes2.add(nodes.get(i).right);    
+                    }                    
+                }
+                levelCount *= 2;                
+                nodes = nodes2; 
+                
+                if(nodes.size() == 0)
+                    return true;
+                count = 0;
+                for(int i=0; i<nodes.size(); i++)
+                {
+                    if(nodes.get(i) != null)
+                        count++;
+                    if(nodes.get(i) == null)
+                    {
+                        for(int j=i+1; j<nodes.size(); j++)
+                        {
+                            if(nodes.get(j) != null)
+                                return false;
+                        }
+                    }            
+                }
+                //System.out.println(nodes2 +" "+levelCount+" "+count);
+                if(count != levelCount)
+                {
+                    for(int i=0; i<nodes.size(); i++)
+                    {
+                        if(nodes.get(i) != null && (nodes.get(i).left != null || nodes.get(i).right != null))
+                            return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+}
