@@ -1,0 +1,76 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class CBTInserter {
+    TreeNode tree = null;
+    public CBTInserter(TreeNode root) {
+        this.tree = root;
+    }
+    
+    public int insert(int v) {
+        List<TreeNode> list = new ArrayList<>();
+        TreeNode node = new TreeNode(v);
+        boolean flag = false;
+        if(tree == null)
+        {
+            tree = node;
+            return v;
+        }
+        list.add(tree);
+        int parent = -1;
+        while(list.size() > 0)
+        {
+            //System.out.println(list);
+            List<TreeNode> list2 = new ArrayList<>();
+            for(int i=0; i<list.size(); i++)
+            {
+                if(!flag && list.get(i).left == null)
+                {
+                    list.get(i).left = node;
+                    list2.add(node);
+                    parent = list.get(i).val; 
+                    flag = true;
+                    break;
+                }
+                else
+                {
+                    list2.add(list.get(i).left);
+                }
+                
+                if(!flag && list.get(i).right == null)
+                {
+                    list.get(i).right = node;
+                    list2.add(node);
+                    flag = true;
+                    parent = list.get(i).val; 
+                    break;
+                }
+                else
+                {
+                    list2.add(list.get(i).right);
+                }
+            }
+            if(flag)
+                break;
+            list = list2;
+        }
+        return parent;  
+    }
+    
+    public TreeNode get_root() {
+        return tree;
+    }
+}
+
+/**
+ * Your CBTInserter object will be instantiated and called as such:
+ * CBTInserter obj = new CBTInserter(root);
+ * int param_1 = obj.insert(v);
+ * TreeNode param_2 = obj.get_root();
+ */
